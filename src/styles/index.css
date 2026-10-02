@@ -1,0 +1,308 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+    color: #1f2937;
+    background-color: #f9f4bc;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom subtle warm scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f0ebc5;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d6ce9a;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b8af7a;
+}
+
+/* Premium Card Base */
+.historian-card {
+  background: #ffffff;
+  border: 1px solid #e8e4d0;
+  border-radius: 16px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.03), 0 1px 2px -1px rgba(0, 0, 0, 0.02);
+  transition: transform 250ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 250ms cubic-bezier(0.22, 1, 0.36, 1), border-color 250ms ease-out;
+}
+
+.historian-card:hover {
+  border-color: #ffd1a4;
+  box-shadow: 0 6px 20px -2px rgba(255, 128, 0, 0.08), 0 2px 6px -1px rgba(0, 0, 0, 0.03);
+}
+
+/* ==========================================================================
+   Micro-Interactions & Animation Keyframes
+   ========================================================================== */
+
+/* 1. Ambient Background Slow Float (12-15s) */
+@keyframes ambientFloat {
+  0% { transform: translate(0px, 0px) scale(1); }
+  50% { transform: translate(25px, 18px) scale(1.08); }
+  100% { transform: translate(-18px, 12px) scale(0.96); }
+}
+
+.animate-ambient-float-1 {
+  animation: ambientFloat 14s infinite alternate ease-in-out;
+}
+
+.animate-ambient-float-2 {
+  animation: ambientFloat 18s infinite alternate-reverse ease-in-out;
+}
+
+/* 2. Logo Entrance with Soft Orange Glow */
+@keyframes logoEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.92);
+    box-shadow: 0 0 0 rgba(255, 128, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 4px 20px rgba(255, 128, 0, 0.3);
+  }
+}
+
+.animate-logo-entrance {
+  animation: logoEntrance 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 3. Traveling Pulse along Causal Flow Chain */
+@keyframes pulseTravel {
+  0% {
+    top: 0%;
+    opacity: 0;
+    transform: translateY(-50%) scale(0.8);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(0%) scale(1.2);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(0%) scale(1.2);
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+    transform: translateY(50%) scale(0.8);
+  }
+}
+
+.animate-pulse-travel {
+  animation: pulseTravel 3.2s infinite ease-in-out;
+}
+
+/* 4. Orange Status Dot Continuous Pulse */
+@keyframes statusDotPulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.18);
+  }
+}
+
+.animate-status-dot {
+  animation: statusDotPulse 2s infinite ease-in-out;
+}
+
+/* 5. Secure Gateway Badge Subtle Glow Pulse (3.5s) */
+@keyframes gatewayPulse {
+  0%, 100% {
+    opacity: 0.92;
+    border-color: rgba(16, 185, 129, 0.3);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+  50% {
+    opacity: 1;
+    border-color: rgba(16, 185, 129, 0.6);
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.15);
+  }
+}
+
+.animate-gateway-pulse {
+  animation: gatewayPulse 3.5s infinite ease-in-out;
+}
+
+/* 6. Harvey Sparkle / Floating Micro Animation */
+@keyframes harveySparkle {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translateY(-2px) rotate(4deg);
+    opacity: 1;
+  }
+}
+
+.animate-harvey-sparkle {
+  animation: harveySparkle 2.8s infinite ease-in-out;
+}
+
+/* 7. Toast Slide-in from Top Right */
+@keyframes toastSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+  }
+}
+
+.animate-toast-in {
+  animation: toastSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 8. Auto-fill Field Flash Feedback */
+@keyframes fieldPopulateFlash {
+  0% {
+    background-color: #FFF0E0;
+    border-color: #FF8000;
+  }
+  100% {
+    background-color: rgba(248, 250, 252, 0.7);
+    border-color: #E8E4D0;
+  }
+}
+
+.animate-field-flash {
+  animation: fieldPopulateFlash 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 9. Animated Link Underline */
+.animated-underline {
+  position: relative;
+  text-decoration: none;
+}
+
+.animated-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 1.5px;
+  background-color: #FF8000;
+  transform: scaleX(0);
+  transform-origin: bottom left;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animated-underline:hover::after {
+  transform: scaleX(1);
+}
+
+/* 10. Button Hover Single Shine Sweep */
+@keyframes shineSweep {
+  0% {
+    transform: translateX(-120%) rotate(25deg);
+  }
+  100% {
+    transform: translateX(220%) rotate(25deg);
+  }
+}
+
+.btn-shine-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shine-container::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 60%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.35) 50%,
+    transparent 100%
+  );
+  transform: translateX(-150%) rotate(25deg);
+  pointer-events: none;
+}
+
+.btn-shine-container:hover::before {
+  animation: shineSweep 0.65s ease-out forwards;
+}
+
+/* 11. Cursor-Tracking Card Radial Light Highlight */
+.card-cursor-light {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-cursor-light::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(
+    320px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(255, 128, 0, 0.06),
+    transparent 80%
+  );
+  opacity: 0;
+  transition: opacity 0.25s ease-out;
+}
+
+.card-cursor-light:hover::after {
+  opacity: 1;
+}
+
+/* 12. Sequential Staggered Delays */
+.delay-0 { animation-delay: 0ms; }
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+.delay-600 { animation-delay: 600ms; }
+
+/* Accessible Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-ambient-float-1,
+  .animate-ambient-float-2,
+  .animate-pulse-travel,
+  .animate-status-dot,
+  .animate-gateway-pulse,
+  .animate-harvey-sparkle,
+  .btn-shine-container:hover::before {
+    animation: none !important;
+  }
+  .card-cursor-light::after {
+    display: none !important;
+  }
+}

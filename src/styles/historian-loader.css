@@ -1,0 +1,140 @@
+/* ==========================================================================
+   Historian AI Loading Experience Styles
+   Visual Language & Animations inspired by Bright Vision AI Hackathon
+   ========================================================================== */
+
+/* 1. Top Thin Animated Gradient Strip (Red -> Blue -> Yellow) */
+.historian-loader-top-strip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #ef4444 0%, #3b82f6 50%, #f59e0b 100%);
+  background-size: 200% 100%;
+  animation: gradientStripShift 4s ease infinite;
+  z-index: 50;
+}
+
+@keyframes gradientStripShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 2. Abstract Low-Opacity Background Geometry */
+.historian-loader-bg-curve {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  opacity: 0.12;
+  transition: opacity 1s ease;
+}
+
+/* 3. Outer Ring Rotation */
+@keyframes ringSpinClockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes ringSpinCounter {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+.animate-ring-spin-slow {
+  animation: ringSpinClockwise 16s linear infinite;
+}
+
+.animate-ring-spin-reverse {
+  animation: ringSpinCounter 12s linear infinite;
+}
+
+/* 4. AI Core Vertical Scan Line Animation */
+@keyframes verticalScan {
+  0% {
+    top: 5%;
+    opacity: 0.2;
+  }
+  50% {
+    top: 90%;
+    opacity: 0.95;
+  }
+  100% {
+    top: 5%;
+    opacity: 0.2;
+  }
+}
+
+.animate-scan-line {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  height: 2.5px;
+  background: linear-gradient(90deg, transparent 0%, #3b82f6 30%, #60a5fa 50%, #3b82f6 70%, transparent 100%);
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.7), 0 0 4px rgba(96, 165, 250, 0.9);
+  border-radius: 2px;
+  animation: verticalScan 2.4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* 5. Core Glow Pulse */
+@keyframes coreGlowPulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.25), 0 0 40px rgba(245, 158, 11, 0.1);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(59, 130, 246, 0.45), 0 0 60px rgba(255, 128, 0, 0.2);
+    transform: scale(1.02);
+  }
+}
+
+.animate-core-glow {
+  animation: coreGlowPulse 3s infinite ease-in-out;
+}
+
+/* 6. Message Crossfade Animation */
+.historian-message-transition {
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 7. Multi-Color Gradient Progress Bar Fill */
+.historian-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ef4444 0%, #3b82f6 50%, #f59e0b 100%);
+  background-size: 200% 100%;
+  transition: width 0.15s cubic-bezier(0.1, 0.8, 0.2, 1);
+  border-radius: 9999px;
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.5);
+}
+
+/* 8. Full Page Exit Scale & Fade Transition */
+.historian-loader-exit {
+  animation: pageExitScaleFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes pageExitScaleFade {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.04);
+    filter: blur(6px);
+  }
+}
+
+/* Accessible Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-ring-spin-slow,
+  .animate-ring-spin-reverse,
+  .animate-scan-line,
+  .animate-core-glow,
+  .historian-loader-top-strip {
+    animation: none !important;
+  }
+}
